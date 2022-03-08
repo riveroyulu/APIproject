@@ -1,0 +1,225 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Projeto de sistema para o dono da concessionária, no qual ele vai poder cadastrar os carros disponíveis no estoque, com a descrição, características, preço e disponibilidade.",
+    "version": "1.0.0",
+    "title": "Api_CONCESSIONÁRIA DE CARROS",
+    "contact": {
+      "email": "grupo2@gmail.com"
+    },
+    "license": {
+      "name": "PROJETO FINAL TOTI GRUPO2"
+    }
+  },
+  "host": "localhost:8081",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "carros",
+      "description": "Controlo de concessionária"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/carros": {
+      "post": {
+        "tags": [
+          "carros"
+        ],
+        "summary": "Adicionar um novo carro no estoque",
+        "description": "",
+        "operationId": "addCar",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/carros"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Dado inválido"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "carros"
+        ],
+        "summary": "Listar todos os carros disponíveis no estoque",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+
+        "responses": {
+          "200": {
+            "description": "solicitaçao com sucesso"
+          }
+        }
+      }
+    },
+    "/carros/{Id}": {
+      "get": {
+        "tags": [
+          "carros"
+        ],
+        "summary": "Listar por Id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "Vai retornar apenas o carro do ID indicado",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "carro não encontrado"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "carros"
+        ],
+        "summary": "Atualizar dados de um carro",
+        "operationId": "updateById",
+       
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "carro atualizado",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body", 
+            "description": "Parametro que vai ser editado",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/carros"
+            }
+          }
+
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto Atualizado"
+            
+          },
+        
+          "400": {
+            "description": "valor inválido"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "carros"
+        ],
+        "summary": "Deletar um carro",
+        "description": "O usuario vai deletar um carro especifico",
+        "operationId": "deleteById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "ID do carro a deletar",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto deletado do banco de dados"
+          },
+          "404": {
+            "description": "Carro não encontrado"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "carros": {
+      "type": "object",
+      "required": [
+        "marca",
+        "modelo",
+        "descricao",
+        "ano",
+        "cor",
+        "preco",
+        "quantidade"
+      ],
+      "properties": {
+        "marca": {
+          "type": "string",
+          "example": "fiat"
+        },
+        "modelo": {
+          "type": "string",
+          "example": "touro"
+        },
+        "descricao": {
+          "type": "string",
+          "example":"ideial para familia"
+        },
+        "ano": {
+          "type":"integer",
+          "example":2021
+        },
+        "cor": {
+          "type": "string",
+          "example":"vermelho"
+        },
+        "preco": {
+          "type": "integer",
+          "example":12000
+        },
+        "quantidade": {
+          "type": "integer",
+          "example": 5
+        },
+        "carImage": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
